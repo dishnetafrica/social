@@ -1,0 +1,28 @@
+{
+  "name": "DishNet Video Generation",
+  "nodes": [
+    {
+      "parameters": {"path": "dishnet/video", "httpMethod": "POST"},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [180, 340]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.API_BASE_URL}}/api/media/video-jobs",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"imageUrl\":$json.imageUrl}"
+      },
+      "name": "Create Video Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [450, 340]
+    }
+  ],
+  "connections": {
+    "Webhook": {"main": [[{"node": "Create Video Job", "type": "main", "index": 0}]]}
+  },
+  "active": false
+}
