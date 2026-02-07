@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  api:
+    build: .
+    container_name: dishnet-social-automation
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

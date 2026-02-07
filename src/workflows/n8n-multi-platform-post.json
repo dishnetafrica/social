@@ -1,0 +1,28 @@
+{
+  "name": "DishNet Multi Platform Post",
+  "nodes": [
+    {
+      "parameters": {"path": "dishnet/publish", "httpMethod": "POST"},
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [180, 260]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.API_BASE_URL}}/api/publish/batch",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json.payload}}"
+      },
+      "name": "Publish Batch",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 260]
+    }
+  ],
+  "connections": {
+    "Webhook": {"main": [[{"node": "Publish Batch", "type": "main", "index": 0}]]}
+  },
+  "active": false
+}
